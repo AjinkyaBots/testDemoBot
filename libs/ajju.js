@@ -1,4 +1,3 @@
-const LIB_PREFIX = "joinCheck_";
 
 function isJoined(chats, onAllJoined, onNotJoined) {
   var chatsArray = chats.split(",");
@@ -19,7 +18,7 @@ function checkMembership(chat_id) {
   Api.getChatMember({
     chat_id: chat_id,
     user_id: user.telegramid,
-    on_result: LIB_PREFIX + "onCheckMembership",
+    on_result: onCheckMembership,
     bb_options: { chat_id: chat_id }
   });
 }
