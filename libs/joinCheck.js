@@ -1,6 +1,6 @@
 const LIB_PREFIX = "joinCheck_";
 
-function isJoined(chats, onAllJoined, onNotJoined) {
+function _isJoined(chats, onAllJoined, onNotJoined) {
   var chatsArray = chats.split(",");
   User.setProperty("totalChats", chatsArray.length, "integer");
   User.setProperty("joinedChats", 0, "integer");
@@ -11,21 +11,21 @@ function isJoined(chats, onAllJoined, onNotJoined) {
   User.setProperty("onNotJoined", onNotJoined, "string");
 
   for(var i = 0; i < chatsArray.length; i++) {
-    checkMembership(chatsArray[i].trim());
+    _checkMembership(chatsArray[i].trim());
   }
 }
 
-function checkMembership(chat_id) {
+function _checkMembership(chat_id) {
   Api.getChatMember({
     chat_id: chat_id,
     user_id: user.telegramid,
-    on_result: LIB_PREFIX + "onCheckMembership",
+    on_result: LIB_PREFIX + "_onCheckMembership",
     bb_options: { chat_id: chat_id }
   });
 }
 
 // Assume this function logic is placed within the Bots.Business command named according to LIB_PREFIX + "onCheckMembership"
-function onCheckMembership() {
+function _onCheckMembership() {
   var result = options.result;
   var chat_id = result.bb_options.chat_id;
   var totalChats = User.getProperty("totalChats");
